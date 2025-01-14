@@ -1,0 +1,35 @@
+name: testing
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - src/matrix
+      - test/matrix
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: "test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out a copy of the repository
+        uses: actions/checkout@v4
+
+      - name: Install test dependency criterion
+        run: sudo apt install libcriterion-dev
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+          cmake --install .
+
+      - name: Test
+        run: |
+          cd build
+          ./dist/bin/test_matrix -j1 --verbose
