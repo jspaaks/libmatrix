@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - src/matrix
-      - test/matrix
+      - src/matrix/*.c
+      - src/matrix/CMakeLists.txt
+      - test/matrix/*.c
+      - test/matrix/CMakeLists.txt
 
 permissions:
   contents: read
