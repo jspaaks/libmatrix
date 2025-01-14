@@ -386,25 +386,24 @@ size_t matrix_readnc (const char * filepath) {
     errno = 0;
     FILE * fp = fopen(filepath, "r");
     if (fp == nullptr) {
-        fprintf(stderr, "%s\nError opening file '%s', aborting.\n", strerror(errno), filepath);
-        goto failure;
+        fprintf(stderr, "ERROR: '%s' when trying to open file '%s', aborting.\n", strerror(errno), filepath);
+        errno = 0;
+        exit(EXIT_FAILURE);
     }
     constexpr size_t cap = 4096;
     char buffer[cap] = {};
     char * status = fgets(buffer, cap, fp);
     if (status == nullptr) {
         fprintf(stderr, "ERROR reading number of columns from file \"%s\", aborting.\n", filepath);
-        goto failure;
+        errno = 0;
+        fclose(fp);
+        exit(EXIT_FAILURE);
     }
     size_t nr = 0;
     size_t nc = 0;
     sscanf(buffer, "%*s (%zux%zu):\n", &nr, &nc);
     fclose(fp);
     return nc;
-failure:
-    errno = 0;
-    fclose(fp);
-    exit(EXIT_FAILURE);
 }
 
 
@@ -412,25 +411,24 @@ size_t matrix_readnr (const char * filepath) {
     errno = 0;
     FILE * fp = fopen(filepath, "r");
     if (fp == nullptr) {
-        fprintf(stderr, "%s\nError opening file '%s', aborting.\n", strerror(errno), filepath);
-        goto failure;
+        fprintf(stderr, "ERROR: '%s' when trying to open file '%s', aborting.\n", strerror(errno), filepath);
+        errno = 0;
+        exit(EXIT_FAILURE);
     }
     constexpr size_t cap = 4096;
     char buffer[cap] = {};
     char * status = fgets(buffer, cap, fp);
     if (status == nullptr) {
         fprintf(stderr, "ERROR reading number of rows from file \"%s\", aborting.\n", filepath);
-        goto failure;
+        errno = 0;
+        fclose(fp);
+        exit(EXIT_FAILURE);
     }
     size_t nr = 0;
     size_t nc = 0;
     sscanf(buffer, "%*s (%zux%zu):\n", &nr, &nc);
     fclose(fp);
     return nr;
-failure:
-    errno = 0;
-    fclose(fp);
-    exit(EXIT_FAILURE);
 }
 
 
@@ -438,8 +436,9 @@ void matrix_readxs (const char * filepath, Matrix * results) {
     errno = 0;
     FILE * fp = fopen(filepath, "r");
     if (fp == nullptr) {
-        fprintf(stderr, "%s\nError opening file '%s', aborting.\n", strerror(errno), filepath);
-        goto failure;
+        fprintf(stderr, "ERROR: '%s' when trying to open file '%s', aborting.\n", strerror(errno), filepath);
+        errno = 0;
+        exit(EXIT_FAILURE);
     }
     constexpr size_t cap = 4096;
     char buffer[cap] = {};
@@ -727,15 +726,12 @@ void matrix_write (const char * basename, const char * varname, const Matrix * m
     FILE * fp = fopen(filename, "w+");
     if (fp == nullptr) {
         fprintf(stderr, "%s\nError opening file '%s', aborting.\n", strerror(errno), filename);
-        goto failure;
+        errno = 0;
+        exit(EXIT_FAILURE);
     }
     matrix_print(fp, varname, matrix);
     fclose(fp);
     return;
-failure:
-    errno = 0;
-    fclose(fp);
-    exit(EXIT_FAILURE);
 }
 
 
