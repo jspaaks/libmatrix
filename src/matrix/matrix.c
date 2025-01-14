@@ -178,7 +178,7 @@ void matrix_dotpro (const Matrix * left, const Matrix * right, Matrix * result) 
 }
 
 
-void matrix_destroy(Matrix ** matrix) {
+void matrix_destroy (Matrix ** matrix) {
     free((*matrix)->xs);
     (*matrix)->xs = nullptr;
     free(*matrix);
