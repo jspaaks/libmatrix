@@ -44,7 +44,6 @@ target_link_libraries(
     tgt_exe_test_matrix
     PRIVATE
         criterion
-        tgt_lib_afuns
         tgt_lib_matrix
 )
 
