@@ -323,23 +323,25 @@ Test(matrix, hadpro) {
 
 Test(matrix, hstack) {
     Matrix * left = matrix_create(2, 3);
-    Matrix * right = matrix_create(2, 3);
-    Matrix * actual = matrix_create(2, 6);
-    Matrix * expected = matrix_create(2, 6);
+    Matrix * right = matrix_create(2, 4);
+    Matrix * actual = matrix_create(2, 7);
+    Matrix * expected = matrix_create(2, 7);
 
-    left->xs[0] = 1.0f;
-    left->xs[1] = 2.0f;
-    left->xs[2] = 3.0f;
-    left->xs[3] = 7.0f;
-    left->xs[4] = 8.0f;
-    left->xs[5] = 9.0f;
+    left->xs[0] =  1.0f;
+    left->xs[1] =  2.0f;
+    left->xs[2] =  3.0f;
+    left->xs[3] =  8.0f;
+    left->xs[4] =  9.0f;
+    left->xs[5] = 10.0f;
 
     right->xs[0] =  4.0f;
     right->xs[1] =  5.0f;
     right->xs[2] =  6.0f;
-    right->xs[3] = 10.0f;
+    right->xs[3] =  7.0f;
     right->xs[4] = 11.0f;
     right->xs[5] = 12.0f;
+    right->xs[6] = 13.0f;
+    right->xs[7] = 14.0f;
 
     matrix_hstack(left, right, actual);
 
@@ -355,9 +357,11 @@ Test(matrix, hstack) {
     expected->xs[9] =  10.0f;
     expected->xs[10] = 11.0f;
     expected->xs[11] = 12.0f;
+    expected->xs[12] = 13.0f;
+    expected->xs[13] = 14.0f;
 
     bool cond = matrix_testeq(actual, expected, 0.01f);
-    cr_assert(cond, "vstack failed");
+    cr_assert(cond, "hstack failed");
 
     matrix_destroy(&left);
     matrix_destroy(&right);

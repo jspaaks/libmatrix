@@ -245,7 +245,7 @@ void matrix_hstack (const Matrix * left, const Matrix * right, Matrix * result) 
     for (size_t ir = 0; ir < nr; ir++) {
         for (size_t ic = 0; ic < right->nc; ic++) {
             size_t i = ir * result->nc + left->nc + ic;
-            size_t j = ir * left->nc + ic;
+            size_t j = ir * right->nc + ic;
             result->xs[i] = right->xs[j];
         }
     }
