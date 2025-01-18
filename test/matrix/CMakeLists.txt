@@ -53,4 +53,11 @@ target_sources(
         ${PROJECT_ROOT}/test/matrix/test_matrix.c
 )
 
+add_test(
+    NAME
+        test_matrix
+    COMMAND
+        ${CMAKE_BINARY_DIR}/dist/bin/test_matrix
+)
+
 install(TARGETS tgt_exe_test_matrix)
