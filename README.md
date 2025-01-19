@@ -82,7 +82,7 @@ DESCRIPTION
        matrix_write     Write a matrix to file
        matrix_zeros     Set all elements of a matrix to 0
 
-                                                           matrix(3)
+                                                                               matrix(3)
 ```
 
 ## Example
