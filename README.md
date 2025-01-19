@@ -132,6 +132,7 @@ void populate_with_rand_int (Matrix * mat) {
 ```
 
 ```console
+$ cmake -D MATRIX_BUILD_EXAMPLES=ON .. && cmake --build . && cmake --install . 
 $ ./dist/bin/example_matrix
 a (3x2):
          9,          1
