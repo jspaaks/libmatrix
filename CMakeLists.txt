@@ -19,6 +19,8 @@ add_subdirectory(${PROJECT_ROOT}/src/matrix)
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # I'm the top-most project
     option(MATRIX_BUILD_TESTING "Whether to build the libmatrix tests" ${BUILD_TESTING})
+    option(MATRIX_BUILD_EXAMPLES "Whether to build the libmatrix examples" "ON")
+
     if (BUILD_TESTING AND MATRIX_BUILD_TESTING)
         set(MATRIX_BUILD_TESTING, "ON")
     elseif (BUILD_TESTING AND NOT MATRIX_BUILD_TESTING)
@@ -31,8 +33,12 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         set(MATRIX_BUILD_TESTING, "OFF")
     endif()
 else()
-    # I'm not the top-most project, use MATRIX_BUILD_TESTING as-is
+    # I'm not the top-most project, use MATRIX_BUILD_TESTING and MATRIX_BUILD_EXAMPLES as-is
     option(MATRIX_BUILD_TESTING "Whether to build the libmatrix tests" "OFF")
+    option(MATRIX_BUILD_EXAMPLES "Whether to build the libmatrix examples" "OFF")
+endif()
+if (MATRIX_BUILD_EXAMPLES)
+    add_subdirectory(${PROJECT_ROOT}/src/example)
 endif()
 if (MATRIX_BUILD_TESTING)
     add_subdirectory(${PROJECT_ROOT}/test/matrix)
