@@ -48,7 +48,8 @@ DESCRIPTION
        matrix_ebesub    Element-by-element subtraction of two matrices
        matrix_hadpro    Element-by-element multiplication (Hadamard product) of two matrices
        matrix_hstack    Stack one matrix to the left of another
-       matrix_ident     Set the elements of a matrix such that it represents the identity matrix
+       matrix_ident     Set the elements of a matrix such that it represents the
+                        identity matrix
        matrix_maxall    Calculate the maximum of all matrix elements
        matrix_maxdwn    Calculate the maximum of each column of a matrix
        matrix_maxrgt    Calculate the maximum of each row of a matrix
